@@ -17,8 +17,11 @@
 		// 控制器分为2步 1.设计暴露数据 2.设计暴露行为
 		 $scope.subjects = [];
 		 $scope.message = '';
+		 var doubanApiAddress = 'https://api.douban.com/v2/movie/in_theaters';
 		// 测试$http服务
-		$http.get('./data.json').then(function (data){
+		// 在Angular中使用JSONP的方式做跨域请求，
+		// 就必须给当前地址加上一个参数callbaclk=JSON_CALLBACKE
+		$http.jsonp(doubanApiAddress+'?callbaclk=JSON_CALLBACK').then(function (data){
 			if(data.status == 200){
 				$scope.subjects = data.data.subjects;
 			}else{
