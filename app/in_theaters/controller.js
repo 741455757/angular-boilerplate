@@ -20,8 +20,14 @@
 		// 控制器分为2步 1.设计暴露数据 2.设计暴露行为
 		 $scope.subjects = [];
 		 $scope.message = '';
-		 HttpService.jsonp('htt',function(){
-		 	
+		 $scope.totalCount = 0;
+		 $scope.loading = true;
+		 HttpService.jsonp('https://api.douban.com/v2/movie/in_theaters',{},function(data){
+		 	// console.log(data);
+		 	$scope.subjects = data.subjects;
+		 	$scope.totalCount = data.total;
+		 	$scope.loading = false;
+		 	$scope.$apply();
 		 })
 	}]);
 })(angular)
