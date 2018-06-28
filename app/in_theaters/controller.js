@@ -7,7 +7,7 @@
 		]);
 // 配置模块的路由
 	module.config(['$routeProvider', function($routeProvider) {
-	  $routeProvider.when('/in_theaters', {
+	  $routeProvider.when('/in_theaters/:page', {
 	    templateUrl: 'in_theaters/view.html',
 	    controller: 'inTheatersCtrl'
 	  });
@@ -15,18 +15,24 @@
 
 	module.controller('inTheatersCtrl', [
 		'$scope', 
+		'$routeParams',
 		'HttpService',
-		function($scope,HttpService) {
+		function($scope,$routeParams,HttpService) {
+			var count =10;
+			var page =parseInt($routeParams.page);
+			var start =(page-1)*count;
 		// 控制器分为2步 1.设计暴露数据 2.设计暴露行为
 		 $scope.subjects = [];
 		 $scope.message = '';
 		 $scope.totalCount = 0;
+		 $scope.totalPages = 0;
 		 $scope.loading = true;
-		 HttpService.jsonp('https://api.douban.com/v2/movie/in_theaters',{},function(data){
+		 HttpService.jsonp('https://api.douban.com/v2/movie/in_theaters',{start:start,count:count},function(data){
 		 	// console.log(data);
 		 	$scope.subjects = data.subjects;
 		 	$scope.totalCount = data.total;
 		 	$scope.loading = false;
+		 	$scope.totalPages = Math.ceil($scope.totalCount/count);
 		 	$scope.$apply();
 		 })
 	}]);
