@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'moviecat.movie-list'
+  'moviecat.movie-list',
+  'movieCat.directive.auto_focus'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/in_theaters/1'});
@@ -20,7 +21,7 @@ config(['$routeProvider', function($routeProvider) {
 		}else if(now.startsWith('/top250')){
 			$scope.type ='top250';
 		}
-		console.log($scope.type);
+		// console.log($scope.type);
 	});
 	
 }]);
