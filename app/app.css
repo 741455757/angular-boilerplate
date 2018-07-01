@@ -158,3 +158,6 @@ body {
     -webkit-transform: scaleY(1.0);
   }
 }
+.pager li > a{
+  cursor: pointer;
+}
