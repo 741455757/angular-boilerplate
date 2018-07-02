@@ -22,6 +22,5 @@ config(['$routeProvider', function($routeProvider) {
 			$scope.type ='top250';
 		}
 		// console.log($scope.type);
-	});
-	
+	});	
 }]);
