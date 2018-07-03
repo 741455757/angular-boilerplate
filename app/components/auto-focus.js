@@ -2,7 +2,6 @@
 * @Author: Jessica Wang
 * @Date:   2018-07-01 22:33:41
 * @Last Modified by:   Jessica Wang
-* @Last Modified time: 2018-07-02 20:04:49
 */
 (function(angular){
 	angular.module('movieCat.directive.auto_focus',[])
