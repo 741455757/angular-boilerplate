@@ -23,5 +23,4 @@ config(['$routeProvider', function($routeProvider) {
 		}
 		// console.log($scope.type);
 	});
-	
 }]);
