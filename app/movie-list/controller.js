@@ -30,8 +30,12 @@
 		 $scope.totalPages = 0;
 		 $scope.currentPage = page;
 		 $scope.loading = true;
-		 HttpService.jsonp('https://api.douban.com/v2/movie/' + $routeParams.category,{start:start,count:count},function(data){
+		 HttpService.jsonp('https://api.douban.com/v2/movie/' + $routeParams.category,
+		 	{start:start,count:count,q:$routeParams.q},
+		 	function(data){
 		 	// console.log(data);
+		 	//
+		 	
 		 	$scope.subjects = data.subjects;
 		 	$scope.title = data.title;
 		 	$scope.totalCount = data.total;
