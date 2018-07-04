@@ -2,7 +2,7 @@
 * @Author: Jessica Wang
 * @Date:   2018-06-27 22:56:47
 * @Last Modified by:   Jessica Wang
-* @Last Modified time: 2018-06-28 21:52:06
+* @Last Modified time: 2018-07-04 21:40:30
 */
 'use strict';
 
@@ -18,7 +18,6 @@
 		this.jsonp =  function(url,data,callback){
 			 // 1.挂载回调函数
 			  var cbFuncName = 'my_json_cb'+Math.random().toString().replace('.','');
-			  $window[cbFuncName] = callback;
 
 
 			 // url: http://api.douban.com/vsdf -> <script> ->http自动执行
@@ -28,7 +27,7 @@
 			  for(var key in data){
 			  	queryString += key + '=' + data[key]+'&';
 
-			  } 
+			  }  
 			  // 3.处理url中的回调参数
 			 
 			  queryString += 'callback='+cbFuncName;
@@ -38,7 +37,13 @@
 			  var scriptElement = $document[0].createElement('script');
 			  scriptElement.src = url + queryString;
 			  // ==注意此时还不能讲其append到页面上
+			
 			 
+			  $window[cbFuncName] = function(data){
+			  	callback(data);
+			  	$document[0].body.removeChild(scriptElement);
+			  };
+			  
 			  // 5.将script标签放页面
 			  $document[0].body.appendChild(scriptElement);
 			// appdend过后页面会自动对这个地址发送请求，请求完成以后自动执行
